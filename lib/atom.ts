@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom, selector, selectorFamily } from "recoil";
 import { IProduct } from "../src/components/ProductCard";
 
 export const themeState = atom({
@@ -21,4 +21,27 @@ export const productsFiltered = selector({
       [...products.filter((product) => product.category === "electronics")],
     ];
   },
+});
+
+export const productsFilteredByCategory = selectorFamily({
+  key: "productsFilteredByCategory",
+  get:
+    (category: string) =>
+    ({ get }) => {
+      const products = get(productsState);
+
+      if (category === "fashion") {
+        return products.filter((product) =>
+          product.category.includes("clothing")
+        );
+      }
+
+      if (category === "accessory") {
+        return products.filter((product) => product.category === "jewelery");
+      }
+
+      if (category === "digital") {
+        return products.filter((product) => product.category === "electronics");
+      }
+    },
 });

@@ -24,6 +24,7 @@ const Wrapper = styled.div`
   display: flex;
   border-radius: 10px;
   overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 
   a {
     display: flex;
