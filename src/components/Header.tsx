@@ -28,6 +28,7 @@ const Wrapper = styled.header`
   .header-inner {
     max-width: 1360px;
     width: 100%;
+    padding: 0 20px;
     margin: 10px auto;
     display: flex;
     justify-content: space-between;
