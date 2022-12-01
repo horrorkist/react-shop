@@ -16,7 +16,7 @@ const Wrapper = styled.footer`
   .footer-inner {
     max-width: 1360px;
     width: 100%;
-    margin: 0 auto;
+    margin: 40px auto;
     display: flex;
     justify-content: center;
     align-items: center;

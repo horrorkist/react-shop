@@ -12,6 +12,11 @@ const CarouselItem = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const BannerText = styled.div`
@@ -21,6 +26,7 @@ const BannerText = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding: 20px;
 
   .banner-text {
     display: flex;
@@ -63,6 +69,7 @@ const BannerButton = styled.button`
 export default function Carousel() {
   return (
     <ResponsiveCarousel
+      autoPlay
       infiniteLoop
       interval={3000}
       ariaLabel="Image Slider"
@@ -70,7 +77,7 @@ export default function Carousel() {
       showStatus={false}
     >
       <CarouselItem>
-        <img src="../../public/img_shop_fashion.jpeg" alt="fashion" />
+        <img src="/img_shop_fashion.jpeg" alt="fashion" />
         <BannerText>
           <div className="banner-text">
             <h2>물빠진 청바지!</h2>
@@ -85,7 +92,7 @@ export default function Carousel() {
         </BannerText>
       </CarouselItem>
       <CarouselItem>
-        <img src="../../public/img_shop_digital.jpeg" alt="digital" />
+        <img src="/img_shop_digital.jpeg" alt="digital" />
         <BannerText>
           <div className="banner-text">
             <h2>신속한 업무처리!</h2>
@@ -100,7 +107,7 @@ export default function Carousel() {
         </BannerText>
       </CarouselItem>
       <CarouselItem>
-        <img src="../../public/img_shop_grocery.jpeg" alt="grocery" />
+        <img src="/img_shop_grocery.jpeg" alt="grocery" />
         <BannerText>
           <div className="banner-text">
             <h2>신선한 식품!</h2>
