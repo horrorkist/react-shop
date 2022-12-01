@@ -5,10 +5,7 @@ import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import styled from "styled-components";
 import { RecoilRoot } from "recoil";
-
-const Home = styled.div`
-  height: 1000vh;
-`;
+import Home from "./routes/Home";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home>Home</Home>,
+        element: <Home />,
       },
       {
         path: "fashion",
