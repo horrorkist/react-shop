@@ -13,7 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
 
   .star:nth-child(odd) {
-    margin-right: -27px;
+    margin-right: -28px;
   }
 
   .star:nth-child(even) {
