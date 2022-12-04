@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getProducts } from "../../lib/api";
 import { productsFiltered, productsState } from "../../lib/atom";
 import Carousel from "../components/Carousel";
-import ProductCard, { IProduct } from "../components/ProductCard";
+import { IProduct } from "../components/ProductCard";
 import ProductList from "../components/ProductList";
 
 const Main = styled.div`
@@ -17,7 +17,7 @@ const Main = styled.div`
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [itemLimit, setItemLimit] = useState(4);
-  const setProducts = useSetRecoilState(productsState);
+  const setProducts = useSetRecoilState<IProduct[]>(productsState);
   const [fashion, accessories, digital] = useRecoilValue(productsFiltered);
   useEffect(() => {
     if (fashion.length) {
@@ -26,8 +26,23 @@ export default function Home() {
     }
 
     getProducts().then((res) => {
+      setProducts(
+        res.map((product: IProduct) => {
+          let newCategory;
+          if (product.category.includes("clothing")) newCategory = "패션";
+          if (product.category.includes("jewelery")) newCategory = "액세서리";
+          if (product.category.includes("electronics")) newCategory = "디지털";
+
+          const roundedPrice = Math.round(product.price);
+
+          return {
+            ...product,
+            category: newCategory,
+            price: roundedPrice,
+          };
+        })
+      );
       setLoading(false);
-      setProducts(res);
     });
   }, []);
 

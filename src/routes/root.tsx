@@ -2,12 +2,14 @@ import styled from "styled-components";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import { ThemeProvider } from "styled-components";
-import { lightTheme, darkTheme } from "../../lib/Theme";
+import { lightTheme, darkTheme, colors } from "../../lib/Theme";
 import { useRecoilValue } from "recoil";
 import { themeState } from "../../lib/atom";
 import Footer from "../components/Footer";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Wrapper = styled.div`
+  font-family: "Noto Sans KR", sans-serif;
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -21,11 +23,14 @@ export default function Root() {
   return (
     <>
       <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>
-        <Header />
-        <Wrapper>
-          <Outlet />
-        </Wrapper>
-        <Footer />
+        <ThemeProvider theme={colors}>
+          <ScrollToTop />
+          <Header />
+          <Wrapper>
+            <Outlet />
+          </Wrapper>
+          <Footer />
+        </ThemeProvider>
       </ThemeProvider>
     </>
   );

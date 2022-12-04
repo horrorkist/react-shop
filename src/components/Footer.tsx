@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Wrapper = styled.footer`
+  font-family: "Noto Sans KR", sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +17,7 @@ const Wrapper = styled.footer`
   .footer-inner {
     max-width: 1360px;
     width: 100%;
-    margin: 40px auto;
+    margin: 20px auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,16 +39,23 @@ const Wrapper = styled.footer`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 0;
-    li {
-      margin: 10px 0;
+    > li {
+      margin: 20px 0;
     }
   }
 
-  .sponcors {
+  .logo-list {
     display: flex;
+    width: 300px;
+    justify-content: space-between;
     li {
-      padding: 0 5px;
+      margin: 0 5px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
     }
   }
 
@@ -109,13 +117,37 @@ export default function Footer() {
             </a>
           </li>
           <li>
-            <ul className="sponcors">
-              <li>Sponcor</li>
-              <li>Sponcor</li>
-              <li>Sponcor</li>
-              <li>Sponcor</li>
-              <li>Sponcor</li>
-              <li>Sponcor</li>
+            <ul className="logo-list">
+              <li>
+                <img src="/Visa.svg" title="Visa" alt="Visa" />
+              </li>
+              <li>
+                <img
+                  src="/Mastercard.svg"
+                  title="Mastercard"
+                  alt="Mastercard"
+                />
+              </li>
+              <li>
+                <img
+                  src="/American_Express.svg"
+                  title="American Express"
+                  alt="American Express"
+                />
+              </li>
+              <li>
+                <img src="/Paypal.svg" title="Paypal" alt="Paypal" />
+              </li>
+              <li>
+                <img
+                  src="/Diners_Club.svg"
+                  title="Diners Club"
+                  alt="Diners Club"
+                />
+              </li>
+              <li>
+                <img src="/Discover.svg" title="Discover" alt="Discover" />
+              </li>
             </ul>
           </li>
           <li>

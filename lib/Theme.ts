@@ -13,3 +13,9 @@ export const lightTheme = {
   text: "#374151",
   isDark: false,
 };
+
+export const colors = {
+  emphasize: "#6419e6",
+  emphasizeDark: "#340881",
+  badgeGreen: "#21B2A6",
+};

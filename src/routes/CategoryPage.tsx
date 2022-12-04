@@ -35,7 +35,7 @@ export default function CategoryPage() {
   return (
     <Main>
       <PathList category={getCategory(pathname)} />
-      <ProductList title={getCategory(pathname)} products={products} />;
+      <ProductList title={getCategory(pathname)} products={products} />
     </Main>
   );
 }

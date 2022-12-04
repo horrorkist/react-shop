@@ -6,6 +6,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 interface IPathList {
   category: string;
   title?: string;
+  productName?: string;
 }
 
 const Wrapper = styled.div`
@@ -27,8 +28,16 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function PathList({ category, title }: IPathList) {
-  const { pathname } = useLocation();
+export default function PathList({ category, title, productName }: IPathList) {
+  if (productName) {
+    return (
+      <Wrapper>
+        <span>{category}</span>
+        <FontAwesomeIcon icon={faChevronRight} size="2xs" />
+        <span>{productName}</span>
+      </Wrapper>
+    );
+  }
 
   if (!title) {
     return (

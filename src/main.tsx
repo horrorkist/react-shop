@@ -6,12 +6,15 @@ import Root from "./routes/root";
 import { RecoilRoot } from "recoil";
 import Home from "./routes/Home";
 import CategoryPage from "./routes/CategoryPage";
+import NotFound from "./routes/404";
+import Cart from "./routes/Cart";
+import ProductDetail from "./routes/ProductDetail";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <div>404</div>,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,
@@ -20,7 +23,7 @@ const router = createBrowserRouter([
       {
         path: "fashion",
         element: <CategoryPage />,
-        errorElement: <div>40404</div>,
+        errorElement: <NotFound />,
       },
       {
         path: "accessory",
@@ -32,16 +35,16 @@ const router = createBrowserRouter([
       },
       {
         path: "cart",
-        element: <div>cart</div>,
+        element: <Cart />,
       },
       {
         path: "product/:id",
-        element: <div>product</div>,
-        errorElement: <div>404</div>,
+        element: <ProductDetail />,
+        errorElement: <NotFound />,
       },
       {
         path: "*",
-        element: <div>404</div>,
+        element: <NotFound />,
       },
     ],
   },

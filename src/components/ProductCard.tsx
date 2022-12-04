@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export interface IProduct {
-  id: string;
+  id: number;
   category: string;
   description: string;
   image: string;

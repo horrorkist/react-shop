@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled, { css } from "styled-components";
-import { themeState } from "../../lib/atom";
+import { cartQuantityState, themeState, productsState } from "../../lib/atom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-regular-svg-icons";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect } from "react";
+import { IProduct } from "./ProductCard";
 
 const Wrapper = styled.header`
+  font-family: "Noto Sans KR", sans-serif;
   width: 100%;
   position: sticky;
   z-index: 999;
@@ -94,8 +97,11 @@ const Wrapper = styled.header`
     transition: all 0.3s ease-in-out;
   }
 
+  .search-container {
+    position: relative;
+  }
+
   .search {
-    margin-left: 10px;
     padding: 15px 10px;
     border: none;
     outline: none;
@@ -103,6 +109,55 @@ const Wrapper = styled.header`
     background-color: ${(props) => props.theme.baseLight};
     color: ${(props) => (props.theme.isDark ? "white" : props.theme.text)};
     transition: background-color 0.2s ease-in-out;
+  }
+
+  .search-list {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    width: 230px;
+    max-height: 300px;
+    overflow: scroll;
+    background-color: ${(props) =>
+      props.theme.isDark ? props.theme.baseLight : "white"};
+    margin-top: 15px;
+    animation: fadeIn 0.1s ease-in-out;
+    transform-origin: top;
+
+    li {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    &.show {
+      display: flex;
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      scale: 0.95;
+    }
+    to {
+      opacity: 1;
+      scale: 1;
+    }
+  }
+
+  .search-item {
+    width: 100%;
+    padding: 10px 15px;
+    margin: 0;
+    background-color: ${(props) => props.theme.baseLight};
+    color: ${(props) => (props.theme.isDark ? "white" : props.theme.text)};
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: ${(props) => props.theme.baseDark};
+    }
   }
 
   .cart {
@@ -114,16 +169,17 @@ const Wrapper = styled.header`
       justify-content: center;
       align-items: center;
       font-size: 12px;
-      width: 20px;
-      height: 20px;
+      width: max-content;
+      min-width: 25px;
+      padding: 5px 5px;
       color: white;
       background-color: red;
-      border-radius: 50%;
+      border-radius: 10px;
       top: 0;
       right: 0;
 
       span {
-        transform: translateY(1px);
+        text-align: center;
       }
     }
   }
@@ -131,9 +187,37 @@ const Wrapper = styled.header`
 
 export default function Header() {
   const [theme, setTheme] = useRecoilState(themeState);
+  const cartQuantity = useRecoilValue(cartQuantityState);
+  const products = useRecoilValue(productsState);
+  const [searchItemList, setSearchItemList] = React.useState<IProduct[]>([]);
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const keyword = e.currentTarget.value;
+
+    if (keyword) {
+      const filteredProducts = products.filter((product) =>
+        product.title.toLowerCase().includes(keyword.toLowerCase())
+      );
+
+      setSearchItemList(filteredProducts);
+
+      document.querySelector(".search-list")?.classList.add("show");
+    } else {
+      setSearchItemList([]);
+      document.querySelector(".search-list")?.classList.remove("show");
+    }
+  };
+  const onFocus = () => {
+    if (searchItemList.length > 0) {
+      document.querySelector(".search-list")?.classList.add("show");
+    }
+  };
+  const onBlur = () => {
+    document.querySelector(".search-list")?.classList.remove("show");
+  };
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
+
   return (
     <Wrapper>
       <div className="header-inner">
@@ -164,16 +248,30 @@ export default function Header() {
               />
             </button>
           </li>
-          <li>
-            <form method="POST">
-              <input className="search" type="text" placeholder="검색" />
-            </form>
+          <li className="search-container">
+            <input
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onChange={onInputChange}
+              className="search"
+              type="text"
+              placeholder="검색"
+            />
+            <ul className="search-list">
+              {searchItemList.map((item) => (
+                <li key={item.id}>
+                  <Link className="search-item" to={`/product/${item.id}`}>
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </li>
           <li>
             <Link to="cart" className="cart">
               <FontAwesomeIcon icon={faBagShopping} size="lg" />
               <div className="badge">
-                <span>0</span>
+                <span>{cartQuantity}</span>
               </div>
             </Link>
           </li>
