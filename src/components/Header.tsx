@@ -124,6 +124,10 @@ const Wrapper = styled.header`
     margin-top: 15px;
     animation: fadeIn 0.1s ease-in-out;
     transform-origin: top;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
 
     li {
       width: 100%;

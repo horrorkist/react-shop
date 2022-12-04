@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Button from "../components/Button";
 
 const Wrapper = styled.div`
-  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;

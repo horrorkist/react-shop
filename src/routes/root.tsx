@@ -11,10 +11,12 @@ import GlobalStyle from "../../lib/global-style";
 
 const Wrapper = styled.div`
   font-family: "Noto Sans KR", sans-serif;
+  position: relative;
   min-height: 100vh;
   width: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   background-color: ${(props) => props.theme.baseColor};
 `;
