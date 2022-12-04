@@ -7,6 +7,7 @@ import { useRecoilValue } from "recoil";
 import { themeState } from "../../lib/atom";
 import Footer from "../components/Footer";
 import ScrollToTop from "../components/ScrollToTop";
+import GlobalStyle from "../../lib/global-style";
 
 const Wrapper = styled.div`
   font-family: "Noto Sans KR", sans-serif;
