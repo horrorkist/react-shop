@@ -39,12 +39,12 @@ const ImgWrapper = styled.div`
 `;
 
 const ProductInfo = styled.div`
-  padding: 20px;
+  padding: 0px 20px;
   flex: 1;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   color: ${(props) => props.theme.text};
 
   .title {
@@ -63,12 +63,13 @@ const ProductInfo = styled.div`
       color: white;
       margin-left: 20px;
       border-radius: 25% / 50%;
-      transform: translateY(-4px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       span {
         font-weight: bold;
         display: inline-block;
-        transform: translateY(1px);
       }
     }
   }
@@ -122,10 +123,6 @@ export default function ProductDetail() {
     });
   };
 
-  const onToCart = () => {
-    setCartList([]);
-  };
-
   useEffect(() => {
     if (!product) {
       navigate("/");
@@ -157,9 +154,7 @@ export default function ProductDetail() {
               {product.rating.rate} / {product.rating.count} 참여
             </span>
           </div>
-          <div onClick={onToCart} className="price">
-            ${product.price}
-          </div>
+          <div className="price">${product.price}</div>
           <div className="cart-buttons">
             <div onClick={onAddToCart}>
               <Button emphasize>장바구니에 담기</Button>

@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { cartState } from "../../lib/atom";
 import Button from "../components/Button";
+import Modal from "../components/Modal";
 import PathList from "../components/PathList";
 
 const Main = styled.div`
+  position: relative;
   max-width: 1360px;
   width: 100%;
   display: flex;
@@ -128,6 +130,7 @@ const CartItemButton = styled.div`
 export default function Cart() {
   const [cartList, setCartList] = useRecoilState(cartState);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [inModal, setInModal] = useState(false);
 
   const onMouseDown = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.currentTarget.classList.add("active");
@@ -177,6 +180,10 @@ export default function Cart() {
     }
   };
 
+  const onPurchaseClick = () => {
+    setInModal(true);
+  };
+
   useEffect(() => {
     let sum = 0;
     cartList.forEach((item) => {
@@ -187,6 +194,21 @@ export default function Cart() {
 
   return (
     <Main>
+      {inModal && (
+        <Modal
+          onConfirm={(e: React.MouseEvent<HTMLElement>) => {
+            e.stopPropagation();
+            console.log(e.target);
+            setCartList([]);
+            setInModal(false);
+          }}
+          onCancel={(e: React.MouseEvent<HTMLElement>) => {
+            e.stopPropagation();
+            console.log(e.target);
+            setInModal(false);
+          }}
+        />
+      )}
       <PathList category="장바구니" />
       <div className="cart-list">
         {cartList.length === 0 ? (
@@ -247,7 +269,9 @@ export default function Cart() {
         )}
         <div className="purchase">
           <span>총 : ${totalPrice.toLocaleString()}</span>
-          <Button emphasize>구매하기</Button>
+          <Button onClick={onPurchaseClick} emphasize>
+            구매하기
+          </Button>
         </div>
       </div>
     </Main>

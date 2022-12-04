@@ -13,6 +13,11 @@ interface ButtonProps {
 }
 
 const Wrapper = styled.button<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  min-height: 50px;
   background-color: ${(props: any) =>
     props.emphasize ? props.theme.emphasize : props.theme.baseColor};
   color: ${(props) =>
