@@ -149,11 +149,19 @@ const Wrapper = styled.header`
 
   .search-item {
     width: 100%;
-    padding: 10px 15px;
+    padding: 15px 15px;
     margin: 0;
     background-color: ${(props) => props.theme.baseLight};
     color: ${(props) => (props.theme.isDark ? "white" : props.theme.text)};
     transition: background-color 0.2s ease-in-out;
+
+    span {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     &:hover {
       background-color: ${(props) => props.theme.baseDark};

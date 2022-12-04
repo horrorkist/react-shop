@@ -20,7 +20,6 @@ const Wrapper = styled.div`
   span {
     line-height: 20px;
     margin-right: 20px;
-    transform: translateY(2px);
 
     &:last-child {
       margin-left: 20px;
